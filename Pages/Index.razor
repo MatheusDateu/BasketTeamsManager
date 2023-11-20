@@ -2,106 +2,105 @@
 <!-- Injecoes de Dependencia -->
 @inject IJSRuntime JSRuntime
 <!-- Conteudo-Inicio -->
-<div class="container mt-4">
-    <div class="team-container team-red-container">
-        <h2 class="text-center">Time Vermelho</h2>
-        <div class="card-container team-red row justify-content-center">
-            @if (PlayersTeamRed != null)
-            {
-                @foreach (var player in PlayersTeamRed)
+<div class="card d-flex">
+    <div class="card-header container-fluid">
+        <div class="d-flex justify-content-between" style="font-size: 1.5em">
+            <div>
+                <p>Pontos de Habilidade: 28</p>
+            </div>
+            <div class="button-container text-center mt-2">
+                <button class="btn btn-primary shuffle-button" style="font-size: 1em" @onclick="ShufflePlayers">Balancear</button>
+            </div>
+            <div>
+                <p>Pontos de Habilidade: 29</p>
+            </div>
+        </div>
+    </div>
+    <div class="card-body d-inline-flex justify-content-between container-fluid">
+        <!-- TEAM RED -->
+        <div class="card bg-light flex-fill mx-2">
+            <h2 class="text-center bg-danger text-light container-fluid">Time Vermelho</h2>
+            <div class="card-container team-red row justify-content-center">
+                @if (PlayersTeamRed != null)
                 {
-                    <div class="card mb-1 col-lg-1 col-md-1 col-sm-12" @onclick="() => TogglePlayer(player)">
-                        <img src="@player.ImageUrl" class="card-img-top" style="height: 150px; object-fit: cover;" alt="@player.Name">
-                        <div class="card-body">
-                            <p class="card-text text-center">@player.Name</p>
+                    @foreach (var player in PlayersTeamRed)
+                    {
+                        <div class="card mb-1 col-lg-1 col-md-1 col-sm-12" @onclick="() => TogglePlayer(player)">
+                            <img src="@player.ImageUrl" class="card-img-top" style="height: 150px; object-fit: cover;" alt="@player.Name">
+                            <div class="card-body">
+                                <p class="card-text text-center">@player.Name</p>
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
-            }
-            else
-            {
-                @for (int i = 0; i < 5; i++)
+            </div>
+        </div>
+        <!-- TEAM BLACK -->
+        <div class="card bg-light flex-fill mx-2">
+            <h2 class="text-center bg-black text-light container-fluid">Time Preto</h2>
+            <div class="card-container team-black row justify-content-center">
+                @if (PlayersTeamBlack != null)
                 {
-                    <div class="card mb-1 col-lg-4 col-md-6 col-sm-12">
-                        <img src="https://via.placeholder.com/200" class="card-img-top" style="height: 150px; object-fit: cover;" alt="Player 6">
-                        <div class="card-body">
-                            <p class="card-text text-center">Jogador 6</p>
+                    @foreach (var player in PlayersTeamBlack)
+                    {
+                        <div class="card mb-1 col-lg-1 col-md-1 col-sm-12" @onclick="() => TogglePlayer(player)">
+                            <img src="@player.ImageUrl" class="card-img-top" style="height: 150px; object-fit: cover;" alt="@player.Name">
+                            <div class="card-body">
+                                <p class="card-text text-center">@player.Name</p>
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
-            }
+            </div>
         </div>
     </div>
 
-    <div class="button-container text-center mt-2">
-        <button class="btn btn-primary shuffle-button" @onclick="ShufflePlayers">Balancear</button>
-    </div>
-
-    <div class="team-container team-black-container">
-        <h2 class="text-center">Time Preto</h2>
-        <div class="card-container team-black row justify-content-center">
-            @if (PlayersTeamBlack != null)
-            {
-                @foreach (var player in PlayersTeamBlack)
-                {
-                    <div class="card mb-1 col-lg-1 col-md-1 col-sm-12" @onclick="() => TogglePlayer(player)">
-                        <img src="@player.ImageUrl" class="card-img-top" style="height: 150px; object-fit: cover;" alt="@player.Name">
-                        <div class="card-body">
-                            <p class="card-text text-center">@player.Name</p>
-                        </div>
-                    </div>
-                }
-            }
-            else
-            {
-                @for (int i = 0; i < 5; i++)
-                {
-                    <div class="card mb-3 col-lg-4 col-md-6 col-sm-12">
-                        <img src="https://via.placeholder.com/200" class="card-img-top" style="height: 150px; object-fit: cover;" alt="Player 6">
-                        <div class="card-body">
-                            <p class="card-text text-center">Jogador 6</p>
-                        </div>
-                    </div>
-                }
-            }
-        </div>
-    </div>
 </div>
-<footer class="footer-container">
-    <div class="footer-content container">
-        <h2 class="footer-title mt-2">Barreira: @PlayersTeamOutGame.Count jogadores cansados</h2>
-        <button class="footer-button btn btn-warning mt-2" @onclick="ShowAddPlayerPopup">Novo Jogador</button>
-        <button class="footer-button btn btn-success mt-2" @onclick="ShuffleTeamOutGame">Embaralhar Barreira</button>
+<footer class="container-fluid bg-secondary bg-opacity-75 bg-opacity-50 border border-secondary rounded border-3">
+    <div class="modal-header">
+        <div class="d-inline-flex">
+            <h2 class="mt-2"><span class="fw-bold">Barreira: </span><span class="bg-warning bg-opacity-100 px-2 py-2">@PlayersTeamOutGame.Count</span> jogadores cansados</h2>
+        </div>
+        <div class="d-inline-flex align-content-end">
+            <button class="btn btn-success mt-2 me-2" style="font-size: 2em" @onclick="ShuffleTeamOutGame">Embaralhar Barreira</button>
+            <button class="btn btn-warning mt-2 text-white" style="font-size: 2em" @onclick="ShowAddPlayerPopup">Novo Jogador</button>
+        </div>
     </div>
     <!-- Listagem de jogadores na barreira -->
-    <div class="footer-content container">
-        <div class="footer-cards d-flex flex-wrap">
+    <div class="container-fluid">
+        <div class="d-flex flex-wrap align-content-start">
             @if (PlayersTeamOutGame != null && PlayersTeamOutGame.Any())
             {
                 foreach (var player in PlayersTeamOutGame)
                 {
-                    <div class="footer-card card" style="margin: 5px;">
-                        <img src="@player.ImageUrl" class="card-img-top" alt="@player.Name">
-                        <div class="card-body">
-                            <p class="card-text text-black">@player.Name</p>
+                    <div class="card p-2 my-2 mx-1" style="flex: 0 1 calc(20% - 2vw);">
+                        <div class="card-header m-0 p-0 text-center">
+                            <img src="@player.ImageUrl" class="card-img-top" style="max-width: 150px; max-height: 150px;" alt="@player.Name">
                         </div>
-                        <div class="card-footer">
-                            <button class="btn btn-primary footer-content" @onclick="() => TogglePlayer(player)">
-                                <span class="oi oi-plus"/>
-                                <p>Vai jogar</p>
-                            </button>
-                            <button class="btn btn-danger footer-content mt-1" @onclick="() => DeletePlayerOfTeamOutGameList(player)">
-                                <span class="oi oi-trash" />
-                                <p>Remover</p>
-                            </button>
+                        <div class="card-body m-0 p-0">
+                            <p class="card-title text-center bg-light">@player.Name</p>
+                        </div>
+                        <div class="card-footer m-0 p-0 d-block d-inline-block bg-secondary bg-opacity-10 container-fluid">
+                            <div>
+                                <button class="btn btn-primary container-fluid" @onclick="() => TogglePlayer(player)">
+                                    <span class="oi oi-plus" />
+                                    <p>Adicionar à Partida</p>
+                                </button>
+                            </div>
+                            <div>
+                                <button class="btn btn-danger mt-1 container-fluid" @onclick="() => DeletePlayerOfTeamOutGameList(player)">
+                                    <span class="oi oi-trash" />
+                                    <p>Remover</p>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 }
             }
             else
             {
-                <div>
-                    <p class="footer-no-players text-danger">Não há jogadores reservas</p>
+                <div class="bg-light">
+                    <p class="text-danger align-middle">Não há jogadores reservas</p>
                 </div>
             }
         </div>
@@ -255,18 +254,18 @@
                 teamBlackSum = GetSum(teamBlack);
             }
         }
-            // Imprime os times finais
-            Console.WriteLine("Time Red:");
-            foreach (var jogador in teamRed)
-            {
-                Console.WriteLine($"{jogador.Name}: {jogador.SkillPointsAverage}");
-            }
+        // Imprime os times finais
+        Console.WriteLine("Time Red:");
+        foreach (var jogador in teamRed)
+        {
+            Console.WriteLine($"{jogador.Name}: {jogador.SkillPointsAverage}");
+        }
 
-            Console.WriteLine("\nTime Black:");
-            foreach (var jogador in teamBlack)
-            {
-                Console.WriteLine($"{jogador.Name}: {jogador.SkillPointsAverage}");
-            }
+        Console.WriteLine("\nTime Black:");
+        foreach (var jogador in teamBlack)
+        {
+            Console.WriteLine($"{jogador.Name}: {jogador.SkillPointsAverage}");
+        }
 
         PlayersTeamRed = new List<Player>(teamRed);
         PlayersTeamBlack = new List<Player>(teamBlack);
@@ -358,7 +357,8 @@
     {
         InvokeAsync(() => StateHasChanged());
     }
-    private void DeletePlayerOfTeamOutGameList(Player player) {
+    private void DeletePlayerOfTeamOutGameList(Player player)
+    {
         if (PlayersTeamOutGame.Contains(player))
         {
             List<Player> _ = PlayersTeamOutGame.ToList();
