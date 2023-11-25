@@ -33,7 +33,7 @@ This will generate a `publish` folder with the project's static files in the `ww
 
 ### Execution
 To run the project, you need to start a static web server in the `wwwroot` folder. You can do this using the command:
-
+#### Python
 ```bash
 python -m http.server --directory {path}\wwwroot
 ```
@@ -48,6 +48,31 @@ This will start a server on the default port 8000, and you can access the projec
 
 ```bash
 python -m http.server 5000 --directory C:\Projects\WASM
+```
+
+This will start the server on port 5000, and you can access the project at the address http://localhost:5000.
+
+#### Dotnet
+```bash
+dotnet tool install --global dotnet-serve
+```
+
+This will install dotnet server toolkit
+
+```bash
+dotnet serve --directory {path}\wwwroot
+```
+
+Where `{path}` is the path to the folder containing the static files. For example, if the folder is in `C:\Projects\WASM`, you can use:
+
+```bash
+dotnet serve --directory C:\Projects\WASM
+```
+
+This will start a server on the default port 52328 (on PowerShell the Listenning Port will be shown after executes the command), and you can access the project in the browser using the address http://localhost:{port}. You can change the port using an additional argument, for example:
+
+```bash
+dotnet serve --directory C:\Projects\WASM --port 5000
 ```
 
 This will start the server on port 5000, and you can access the project at the address http://localhost:5000.
