@@ -6,29 +6,32 @@
     <div class="card-header container-fluid">
         <div class="d-flex justify-content-between" style="font-size: 1.5em">
             <div>
-                <p>Pontos de Habilidade: 28</p>
+                <p>Pontos de Habilidade: @TeamRedMediaOfSkillPointSum</p>
             </div>
             <div class="button-container text-center mt-2">
                 <button class="btn btn-primary shuffle-button" style="font-size: 1em" @onclick="ShufflePlayers">Balancear</button>
             </div>
             <div>
-                <p>Pontos de Habilidade: 29</p>
+                <p>Pontos de Habilidade: @TeamBlackMediaOfSkillPointSum</p>
             </div>
         </div>
     </div>
     <div class="card-body d-inline-flex justify-content-between container-fluid">
         <!-- TEAM RED -->
-        <div class="card bg-light flex-fill mx-2">
+        <div class="bg-light mx-2 container-fluid p-2 border border-secondary rounded border-1">
             <h2 class="text-center bg-danger text-light container-fluid">Time Vermelho</h2>
-            <div class="card-container team-red row justify-content-center">
+            <div class="container-fluid row justify-content-center">
                 @if (PlayersTeamRed != null)
                 {
                     @foreach (var player in PlayersTeamRed)
                     {
-                        <div class="card mb-1 col-lg-1 col-md-1 col-sm-12" @onclick="() => TogglePlayer(player)">
-                            <img src="@player.ImageUrl" class="card-img-top" style="height: 150px; object-fit: cover;" alt="@player.Name">
+                        <div class="card mb-1" @onclick="() => TogglePlayer(player)">
+                            <img src="@player.ImageUrl" class="card-img-top" style="height: 70px; width: 70px;" alt="@player.Name">
                             <div class="card-body">
                                 <p class="card-text text-center">@player.Name</p>
+                                <div class="card-footer">
+                                <p class="card-text text-center">Nível: @player.SkillPointsAverage</p>
+                                </div>
                             </div>
                         </div>
                     }
@@ -36,23 +39,27 @@
             </div>
         </div>
         <!-- TEAM BLACK -->
-        <div class="card bg-light flex-fill mx-2">
+        <div class="bg-light mx-2 container-fluid p-2 border border-secondary rounded border-1">
             <h2 class="text-center bg-black text-light container-fluid">Time Preto</h2>
-            <div class="card-container team-black row justify-content-center">
+            <div class="container-fluid row justify-content-center">
                 @if (PlayersTeamBlack != null)
                 {
                     @foreach (var player in PlayersTeamBlack)
                     {
-                        <div class="card mb-1 col-lg-1 col-md-1 col-sm-12" @onclick="() => TogglePlayer(player)">
-                            <img src="@player.ImageUrl" class="card-img-top" style="height: 150px; object-fit: cover;" alt="@player.Name">
+                        <div class="card mb-1" @onclick="() => TogglePlayer(player)">
+                            <img src="@player.ImageUrl" class="card-img-top" style="height: 70px; width: 70px;" alt="@player.Name">
                             <div class="card-body">
                                 <p class="card-text text-center">@player.Name</p>
+                            </div>
+                            <div class="card-footer">
+                                <p class="card-text text-center text-end">Nível: @player.SkillPointsAverage</p>
                             </div>
                         </div>
                     }
                 }
             </div>
         </div>
+
     </div>
 
 </div>
@@ -79,6 +86,7 @@
                         </div>
                         <div class="card-body m-0 p-0">
                             <p class="card-title text-center bg-light">@player.Name</p>
+                            <p class="card-text text-center bg-warning bg-opacity-75">Nível: @player.SkillPointsAverage</p>
                         </div>
                         <div class="card-footer m-0 p-0 d-block d-inline-block bg-secondary bg-opacity-10 container-fluid">
                             <div>
@@ -146,7 +154,10 @@
     private bool showAddPlayerPopup = false;
     private string newPlayerName = "";
     private string newPlayerImageUrl = "";
-    private int newPlayerPoints = 0;
+    private float newPlayerPoints = 0.00f;
+
+    private float TeamRedMediaOfSkillPointSum { get; set; } = 0.00f;
+    private float TeamBlackMediaOfSkillPointSum { get; set; } = 0.00f;
 
     protected override void OnInitialized()
     {
@@ -154,24 +165,24 @@
         // Adicionar jogadores à lista inicial
         PlayersTeamOutGame = new Queue<Player>(new[]
         {
-            new Player { Name = "Matheus Delmondes", ImageUrl = "https://th.bing.com/th/id/OIP.R3jaK2LrLmDOQXWdE--qhwHaHa?pid=ImgDet&rs=1", SkillPointsAverage = 10 },
-            new Player { Name = "Samuel", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 9 },
-            new Player { Name = "Antonino", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 5 },
-            new Player { Name = "Bruno Zamorano", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 6 },
-            new Player { Name = "Rihan", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 7 },
-            new Player { Name = "Marcos", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 6 },
-            new Player { Name = "Lucas Bessa", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 5 },
-            new Player { Name = "Alexandre V.", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 3 },
-            new Player { Name = "Henrique Lino", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 4 },
-            new Player { Name = "Thiago Melo", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 2 },
-            new Player { Name = "Benjamin", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 3 },
-            new Player { Name = "Matheus Brayan", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 2 },
-            new Player { Name = "Ismael", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 6 },
-            new Player { Name = "G. Borba", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 3 },
-            new Player { Name = "Pedro", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 1 },
-            new Player { Name = "Matheus F. James", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 7 },
-            new Player { Name = "Hitalo", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 8 },
-            new Player { Name = "Ataías", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 6 },
+            new Player { Name = "Matheus Delmondes", ImageUrl = "https://th.bing.com/th/id/OIP.R3jaK2LrLmDOQXWdE--qhwHaHa?pid=ImgDet&rs=1", SkillPointsAverage = 5f },
+            new Player { Name = "Samuel", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 8.75f },
+            new Player { Name = "Antonino", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 6.25f },
+            new Player { Name = "Bruno Zamorano", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 6.75f },
+            new Player { Name = "Rihan", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 7f },
+            new Player { Name = "Marcos", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 5.75f },
+            new Player { Name = "Lucas Bessa", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 5.5f },
+            new Player { Name = "Alexandre V.", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 4.25f },
+            new Player { Name = "Henrique Lino", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 4.5f },
+            new Player { Name = "Thiago Melo", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 4.00f },
+            new Player { Name = "Benjamin", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 2.75f },
+            new Player { Name = "Ismael", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 9.25f },
+            new Player { Name = "Gabriel N1", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 8.25f },
+            new Player { Name = "Magno", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 3.25f },
+            new Player { Name = "G. Borba", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 2.5f },
+            new Player { Name = "Matheus F. James", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 6.5f },
+            new Player { Name = "Hitalo", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 7.00f },
+            new Player { Name = "Ataías", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 5.00f },
         });
 
         base.OnInitialized();
@@ -218,7 +229,7 @@
             isBetter = false;
             int betterI = -1;
             int betterJ = -1;
-            int betterDifference = Math.Abs(teamRedSum - teamBlackSum);
+            float betterDifference = Math.Abs(teamRedSum - teamBlackSum);
 
             // Testa todas as possíveis trocas entre os conjuntos
             for (int i = 0; i < teamRed.Count; i++)
@@ -226,11 +237,11 @@
                 for (int j = 0; j < teamBlack.Count; j++)
                 {
                     // Calcula a nova soma de cada conjunto se trocar os jogadores nas posições i e j
-                    int newTeamRedSum = teamRedSum - teamRed[i].SkillPointsAverage + teamBlack[j].SkillPointsAverage;
-                    int newTeamBlackSum = teamBlackSum - teamBlack[j].SkillPointsAverage + teamRed[i].SkillPointsAverage;
+                    float newTeamRedSum = teamRedSum - teamRed[i].SkillPointsAverage + teamBlack[j].SkillPointsAverage;
+                    float newTeamBlackSum = teamBlackSum - teamBlack[j].SkillPointsAverage + teamRed[i].SkillPointsAverage;
 
                     // Calcula a nova diferença entre as somas (considerando apenas o valor absoluto/modular)
-                    int newDifference = Math.Abs(newTeamRedSum - newTeamBlackSum);
+                    float newDifference = Math.Abs(newTeamRedSum - newTeamBlackSum);
 
                     // Se a nova diferença for menor que a melhor diferença encontrada até agora, atualiza as variáveis
                     if (newDifference < betterDifference)
@@ -269,10 +280,12 @@
 
         PlayersTeamRed = new List<Player>(teamRed);
         PlayersTeamBlack = new List<Player>(teamBlack);
+        TeamRedMediaOfSkillPointSum = teamRedSum;
+        TeamBlackMediaOfSkillPointSum = teamBlackSum;
         UpdateUI();
         await MostrarAlerta();
     }
-    static int GetSum(List<Player> jogadores) => jogadores.Sum(p => p.SkillPointsAverage);
+    static float GetSum(List<Player> jogadores) => jogadores.Sum(p => p.SkillPointsAverage);
     private void TogglePlayer(Player player)
     {
         Console.WriteLine($"TogglePlayer method called for player: {player.Name}");
@@ -298,8 +311,9 @@
             DeletePlayerOfTeamOutGameList(player);
             //PlayersTeamOutGame.Dequeue(); // Remove o jogador da fila
         }
-        // Se não houver espaço em nenhum time, o jogador permanece na fila
-
+        // Default
+        TeamRedMediaOfSkillPointSum = GetSum(PlayersTeamRed);
+        TeamBlackMediaOfSkillPointSum = GetSum(PlayersTeamBlack);
         Console.WriteLine($"Player {player.Name} toggled. TeamRed count: {PlayersTeamRed.Count}, TeamBlack count: {PlayersTeamBlack.Count}, TeamOutGame count: {PlayersTeamOutGame.Count}");
 
         UpdateUI();
@@ -319,7 +333,7 @@
         // Validar os dados do novo jogador aqui, se necessário
         if (string.IsNullOrWhiteSpace(newPlayerName))
         {
-            MostrarAlerta("Ao cadastrador um Novo Jogador é importante que informe o nome dele. Colabore. :)");
+            MostrarAlerta("Ao cadastrador um Novo Jogador, é importante que informe o nome dele. Colabore. :)");
             return;
         }
 
@@ -330,7 +344,8 @@
 
         if (string.IsNullOrWhiteSpace(newPlayerImageUrl))
         {
-            newPlayerImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain";
+            // newPlayerImageUrl = @"~\wwwroot\assets\default_profile.jpg";
+            newPlayerImageUrl = @"../assets/default_profile.jpg";
         }
 
         // Criar o novo jogador
@@ -347,7 +362,7 @@
         // Limpar os campos do formulário
         newPlayerName = "";
         newPlayerImageUrl = "";
-        newPlayerPoints = 0;
+        newPlayerPoints = 0.00f;
 
         // Fechar o popup
         showAddPlayerPopup = false;
@@ -366,7 +381,7 @@
             PlayersTeamOutGame = new Queue<Player>(_);
         }
     }
-    private void ShuffleTeamOutGame()
+    private async void ShuffleTeamOutGame()
     {
         List<Player> _ = PlayersTeamOutGame.ToList();
         int length = _.Count;
@@ -379,6 +394,7 @@
             _[length] = _randomPlayer;
         }
         PlayersTeamOutGame = new Queue<Player>(_);
+        await MostrarAlerta("A barreira foi embaralhada");
     }
     class TeamCombination
     {
@@ -391,7 +407,7 @@
     class Player
     {
         public string Name { get; set; } = "Anônimo";
-        public int SkillPointsAverage { get; set; } = 0;
+        public float SkillPointsAverage { get; set; } = 0.00f;
         public string ImageUrl { get; set; } = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain";
     }
 }
