@@ -165,24 +165,31 @@
         // Adicionar jogadores à lista inicial
         PlayersTeamOutGame = new Queue<Player>(new[]
         {
-            new Player { Name = "Matheus Delmondes", ImageUrl = "https://th.bing.com/th/id/OIP.R3jaK2LrLmDOQXWdE--qhwHaHa?pid=ImgDet&rs=1", SkillPointsAverage = 5f },
-            new Player { Name = "Samuel", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 8.75f },
-            new Player { Name = "Antonino", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 6.25f },
-            new Player { Name = "Bruno Zamorano", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 6.75f },
-            new Player { Name = "Rihan", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 7f },
-            new Player { Name = "Marcos", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 5.75f },
-            new Player { Name = "Lucas Bessa", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 5.5f },
-            new Player { Name = "Alexandre V.", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 4.25f },
-            new Player { Name = "Henrique Lino", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 4.5f },
-            new Player { Name = "Thiago Melo", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 4.00f },
-            new Player { Name = "Benjamin", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 2.75f },
-            new Player { Name = "Ismael", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 9.25f },
-            new Player { Name = "Gabriel N1", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 8.25f },
-            new Player { Name = "Magno", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 3.25f },
-            new Player { Name = "G. Borba", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 2.5f },
-            new Player { Name = "Matheus F. James", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 6.5f },
-            new Player { Name = "Hitalo", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 7.00f },
-            new Player { Name = "Ataías", ImageUrl = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain", SkillPointsAverage = 5.00f },
+            new Player { Name = "Matheus Delmondes", ImageUrl = "../assets/admin_profile.jpg", SkillPointsAverage = 6.33f },
+            new Player { Name = "Antonino", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 7.17f },
+            new Player { Name = "Bruno Zamorano", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 7.17f },
+            new Player { Name = "Lucas Bessa", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 5.33f },
+            new Player { Name = "Alexandre V.", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 5.17f },
+            new Player { Name = "Henrique Lino", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 4.5f },
+            new Player { Name = "Rihan", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 7.17f },
+            new Player { Name = "Benjamin", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 3.00f },
+            new Player { Name = "Iago Kaique", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 4.00f },
+            new Player { Name = "Ataías", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 4.50f },
+            new Player { Name = "Matheus F. James", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 7.83f },
+            new Player { Name = "Fábio", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 7.50f },
+            new Player { Name = "MV", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 6.17f },
+            new Player { Name = "Marcos", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 7.17f },
+            new Player { Name = "Thiago Melo", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 4.17f },
+            new Player { Name = "Gabriel Borba", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 3.50f },
+            new Player { Name = "Otávio", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 2.67f },
+            new Player { Name = "Breno", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 5.50f },
+            new Player { Name = "Samuel", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 8.67f },
+            new Player { Name = "Ismael", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 8.00f },
+            new Player { Name = "Gabriel Marques", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 8.33f },
+            new Player { Name = "Cleyton", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 8.83f },
+            new Player { Name = "Hitalo", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 7.66f },
+            new Player { Name = "Magno", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 3.67f },
+            new Player { Name = "Hanna", ImageUrl = "../assets/default_profile.jpg", SkillPointsAverage = 5.00f },
         });
 
         base.OnInitialized();
@@ -408,6 +415,6 @@
     {
         public string Name { get; set; } = "Anônimo";
         public float SkillPointsAverage { get; set; } = 0.00f;
-        public string ImageUrl { get; set; } = "https://th.bing.com/th/id/OIP.zGPVP12L7QsY3EJsmobCtQHaJb?rs=1&pid=ImgDetMain";
+        public string ImageUrl { get; set; } = "../assets/default_profile.jpg";
     }
 }
